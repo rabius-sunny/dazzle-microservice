@@ -1,0 +1,21 @@
+{
+  "name": "my-app",
+  "scripts": {
+    "start": "vercel dev -l 3002",
+    "deploy": "vercel",
+    "db:generate": "drizzle-kit generate --schema=./src/db/schema.ts --dialect=postgresql",
+    "db:migrate": "tsx ./src/db/migrate.ts"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.4",
+    "drizzle-orm": "^0.36.4",
+    "hono": "^4.6.12"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5",
+    "drizzle-kit": "^0.28.1",
+    "postgres": "^3.4.5",
+    "tsx": "^4.19.2",
+    "vercel": "^32.4.1"
+  }
+}
