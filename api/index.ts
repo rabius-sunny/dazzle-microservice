@@ -13,10 +13,13 @@ import {
 import { count, desc, eq } from 'drizzle-orm'
 import {
   createProduct,
+  createRequest,
   deleteProduct,
+  deleteRequest,
   getProductBy,
   getProducts,
-  getProductsByCatBrand
+  getProductsByCatBrand,
+  getRequests
 } from '../src/controllers/products'
 
 export const config = {
@@ -63,6 +66,21 @@ app.get('/products-by-id/:id', async (c) => {
   const product = await getProductBy(c)
   return c.json(product)
 })
+
+// requests
+app
+  .get('/requests/:id?', async (c) => {
+    const allRequests = await getRequests(c)
+    return c.json(allRequests, 200)
+  })
+  .post(async (c) => {
+    await createRequest(c)
+    return c.json(201)
+  })
+  .delete(async (c) => {
+    await deleteRequest(c)
+    return c.json(200)
+  })
 
 // create brands
 app

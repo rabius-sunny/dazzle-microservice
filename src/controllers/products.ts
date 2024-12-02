@@ -109,6 +109,43 @@ export const getProductsByCatBrand = async (c: any) => {
   return allProducts
 }
 
+export const createRequest = async (c: any) => {
+  const sql = neon(dburl)
+  const db = drizzle({ client: sql, schema })
+
+  const body = await c.req.json()
+  await db.insert(schema.requests).values({ ...body })
+}
+
+export const getRequests = async (c: any) => {
+  const sql = neon(dburl)
+  const db = drizzle({ client: sql, schema })
+
+  const allRequests = await db.query.requests.findMany({
+    with: {
+      product: {
+        with: {
+          brand: true,
+          category: true
+        }
+      },
+      ram: true,
+      condition: true
+    },
+    orderBy: desc(schema.requests.createdAt)
+  })
+
+  return allRequests
+}
+
+export const deleteRequest = async (c: any) => {
+  const sql = neon(dburl)
+  const db = drizzle({ client: sql, schema })
+
+  const id = c.req.param('id')
+
+  await db.delete(schema.requests).where(eq(schema.requests.id, id))
+}
 // export const ctrName = async (c: any) => {
 //   const sql = neon(dburl)
 //   const db = drizzle({ client: sql, schema })

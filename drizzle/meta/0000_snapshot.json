@@ -1,5 +1,5 @@
 {
-  "id": "447cd9b6-5e23-4fa9-a813-ec39cd8800c8",
+  "id": "179811d6-5544-4374-8baa-917584730615",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -99,8 +99,7 @@
         },
         "type": {
           "name": "type",
-          "type": "condition_types",
-          "typeSchema": "public",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -419,17 +418,7 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {
-    "public.condition_types": {
-      "name": "condition_types",
-      "schema": "public",
-      "values": [
-        "New",
-        "Flawless",
-        "Average"
-      ]
-    }
-  },
+  "enums": {},
   "schemas": {},
   "sequences": {},
   "roles": {},

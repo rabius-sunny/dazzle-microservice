@@ -9,13 +9,6 @@ import {
 } from 'drizzle-orm/pg-core'
 import { sql, relations } from 'drizzle-orm'
 
-// Define the condition type as an ENUM
-export const conditionsEnum = pgEnum('condition_types', [
-  'New',
-  'Flawless',
-  'Average'
-])
-
 // Products Table
 export const products = pgTable('products', {
   id: uuid('id')
@@ -82,7 +75,7 @@ export const conditions = pgTable('conditions', {
     .unique()
     .primaryKey()
     .default(sql`gen_random_uuid()`),
-  type: conditionsEnum('type').notNull(),
+  type: text('type').notNull(),
   price: decimal('price', { precision: 10, scale: 2 }).notNull(),
   ramId: uuid('ram_id').references(() => rams.id),
   createdAt: timestamp('created_at').defaultNow()
@@ -99,6 +92,21 @@ export const productsRelations = relations(products, ({ one, many }) => ({
     references: [brands.id]
   }),
   rams: many(rams)
+}))
+
+export const requestRelations = relations(requests, ({ one, many }) => ({
+  product: one(products, {
+    fields: [requests.productId],
+    references: [products.id]
+  }),
+  ram: one(rams, {
+    fields: [requests.ramId],
+    references: [rams.id]
+  }),
+  condition: one(conditions, {
+    fields: [requests.conditionId],
+    references: [conditions.id]
+  })
 }))
 
 export const ramRelations = relations(rams, ({ one, many }) => ({

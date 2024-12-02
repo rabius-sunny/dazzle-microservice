@@ -1,4 +1,3 @@
-CREATE TYPE "public"."condition_types" AS ENUM('New', 'Flawless', 'Average');--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "brands" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" text NOT NULL,
@@ -15,7 +14,7 @@ CREATE TABLE IF NOT EXISTS "categories" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "conditions" (
 	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"type" "condition_types" NOT NULL,
+	"type" text NOT NULL,
 	"price" numeric(10, 2) NOT NULL,
 	"ram_id" uuid,
 	"created_at" timestamp DEFAULT now(),
