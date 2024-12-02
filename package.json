@@ -3,6 +3,7 @@
   "scripts": {
     "start": "vercel dev -l 3002",
     "deploy": "vercel",
+    "deploy:prod": "vercel --prod",
     "db:generate": "drizzle-kit generate --schema=./src/db/schema.ts --dialect=postgresql",
     "db:migrate": "tsx ./src/db/migrate.ts"
   },
